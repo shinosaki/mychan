@@ -1,0 +1,12 @@
+name = "mychan"
+compatibility_date = "2023-09-01"
+main = "src/worker.js"
+
+node_compat = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "mychan-db"
+database_id = "_"
+preview_database_id = "local"
+migrations_dir = "./drizzle"
