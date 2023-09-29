@@ -1,8 +1,9 @@
 # mychan
 
 Lightweight 2channel(2ちゃんねる) clone. Works on Cloudflare Workers and Bun.  
+Like `zerochplus` or `d1ch.cc`.
 
-mychanは2ちゃんねる互換の掲示板ソフトウェアです。Cloudflare WorkersかBun上で動作します。
+mychanは2ちゃんねる互換の掲示板ソフトウェアです。Cloudflare WorkersかBun上で動作します。  
 
 ## How to Deploy
 1. Create database  
