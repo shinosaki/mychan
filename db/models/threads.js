@@ -60,12 +60,29 @@ export const createThread = ({db}, board, dat) =>
     .returning({ id: threads.id, board: threads.board })
     .then(r => first(r));
 
-export const updateThread = ({db}, id, dat) =>
+export const archivedThread = ({db}, id) =>
   db.update(threads)
+    .set({ archived: true })
+    .where(eq(threads.id, id));
+
+export const updateThread = async ({db}, id, dat) => {
+  const data = await db.update(threads)
     .set({
       dat: sql`${threads.dat} || ${dat}`,
       updatedAt: new Date(),
     })
-    .where(eq(threads.id, id))
-    .returning({ id: threads.id, board: threads.board })
+    .where(
+      and(
+        eq(threads.id, id),
+        eq(threads.archived, false)
+      )
+    )
+    .returning({ id: threads.id, board: threads.board, dat: threads.dat })
     .then(r => first(r));
+
+  if (data?.dat.split('\n').length >= 1000) {
+    await archivedThread({db}, id);
+  };
+
+  return data;
+};

@@ -20,7 +20,10 @@ export const KakikomiForm = (props) => (
       <textarea name="MESSAGE" />
     </label>
 
-    <button name="submit" value="書き込む">書き込む</button>
+    {(props.archived)
+      ? <p style="text-align: center">このスレッドには書き込めません</p>
+      : <button name="submit" value="書き込む">書き込む</button>
+    }
   </form>
 );
 

@@ -1,4 +1,4 @@
-import { getDat } from '$db';
+import { getThread } from '$db';
 import { parseDat, parseRange } from '$lib/utils';
 import { Read } from '$lib/layouts';
 
@@ -7,7 +7,7 @@ export default {
     const board = c.req.param('boardName');
     const [ id, range ] = c.req.param('id').split('/');
 
-    const data = await getDat(c, id);
+    const data = await getThread(c, id);
 
     if (!data) {
       return c.text('ＥＲＲＯＲ: データの取得に失敗しました。', 500);
@@ -23,7 +23,7 @@ export default {
     // };
 
     return c.html(
-      <Read {...{ id, board, subject, comments }} />
+      <Read {...{ id, board, subject, comments, archived: data.archived }} />
     );
   }
 };
